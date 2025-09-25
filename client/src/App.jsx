@@ -1,10 +1,13 @@
-import { Button } from './components/ui/button'
+import AuthPage from './pages/auth';
+import { Route,Routes } from  'react-router-dom';
 
 function App() {
 
   return (
     <>
-      <Button >Check</Button>
+     <Routes>
+                <Route path="/auth" element={<AuthPage />}></Route>
+      </Routes>
     </>
   )
 }

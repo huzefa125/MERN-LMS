@@ -7,9 +7,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 
-// Debug check
-console.log("MONGO_URL from .env:", MONGO_URL);
-
 app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
