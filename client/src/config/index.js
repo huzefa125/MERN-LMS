@@ -50,3 +50,13 @@ export const signUpFormControls = [
 ];
 
 
+export const initialSignInFormData = {
+  userEmail: "",
+  password: "",
+}
+
+export const initialSignUpFormData = {
+  userName: "",
+  userEmail: "",
+  password: "",
+}

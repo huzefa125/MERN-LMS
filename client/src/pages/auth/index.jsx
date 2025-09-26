@@ -1,15 +1,21 @@
 import { GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import CommonForm from "@/components/common-form";
 import { signInFormControls, signUpFormControls } from "@/config";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/context/auth-context";
 function AuthPage() {
-    const [activeTab,setActiveTab] = useState('signin')
+    const [activeTab, setActiveTab] = useState('signin')
+    const { signInFormData, setSignInFormData, signUpFormData, setSignUpFormData, handleLoginUser, handleRegisterUser } = useContext(AuthContext)
 
     function handleTabChange(value){
         setActiveTab(value)
     }
+
+    function handleSignIn() { handleLoginUser() }
+    function handleSignUp() { handleRegisterUser() }
     return( 
         <>
             <div className="flex flex-col min-h-screen">
@@ -30,22 +36,39 @@ function AuthPage() {
                             <TabsTrigger value="signup">Sign Up</TabsTrigger>
                         </TabsList>
                         <TabsContent value='signin'>
-                          <CommonForm
-                            formControls={signInFormControls}
-                            buttonText="Sign In"
-                            formData={{}}
-                            setFormData={() => {}}
-                            handleSubmit={() => {}}
-                          />
+
+                            <Card className="p-6 space-y-4">
+                                <CardHeader>
+                                    <CardTitle>Sign In to your account</CardTitle>
+                                    <CardDescription>Enter your email and password to sign in</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-2">
+                                    <CommonForm
+                                        formControls={signInFormControls}
+                                        buttonText="Sign In"
+                                        formData={signInFormData}
+                                        setFormData={setSignInFormData}
+                                        handleSubmit={handleSignIn}
+                                    />
+                                </CardContent>
+                            </Card>
                         </TabsContent>
                         <TabsContent value='signup'>
-                          <CommonForm
-                            formControls={signUpFormControls}
-                            buttonText="Sign Up"
-                            formData={{}}
-                            setFormData={() => {}}
-                            handleSubmit={() => {}}
-                          />
+                            <Card className="p-6 space-y-4">
+                                <CardHeader>
+                                    <CardTitle>Create a new account</CardTitle>
+                                    <CardDescription>Enter your details to get started</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-2">
+                                    <CommonForm
+                                        formControls={signUpFormControls}
+                                        buttonText="Sign Up"
+                                        formData={signUpFormData}
+                                        setFormData={setSignUpFormData}
+                                        handleSubmit={handleSignUp}
+                                    />
+                                </CardContent>
+                            </Card>
                         </TabsContent>
                     </Tabs>
                 </div>
